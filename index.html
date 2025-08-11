@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Дмитрий Могилевцев — WebMogilevtsev | Разработка, консультации, ревью</title>
+  <meta name="description" content="Дмитрий «WebMogilevtsev»: разработка веб‑сервисов и программ, консультации и ревью. Честно, понятно, без бюрократии. Напишите в Telegram." />
+  <meta name="theme-color" content="#0A0F0D" />
+  <meta property="og:title" content="Дмитрий «WebMogilevtsev» — разработка без бюрократии" />
+  <meta property="og:description" content="Разработка, консультации, ревью. Честно, открыто, по делу. CTA: Написать в Telegram." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='100%25' height='100%25' rx='12' fill='%230F3D2E'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-size='28' font-family='monospace' fill='%23EAF0F7'%3E%3C/%3E%3C/svg%3E" />
+  <style>
+    /* ===== Design tokens ===== */
+    :root{
+      --bg:#0A0F0D; --fg:#EAF0F7; --muted:#9AA4B2;
+      --acc:#2B82F6; --acc-soft:#7CCFFD;
+      --deep:#0F3D2E; --deep-strong:#145A46; --deep-accent:#14B873;
+      --line:rgba(255,255,255,.08);
+      --radius:14px; --r-btn:999px;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --space-1:clamp(10px,1.2vw,14px);
+      --space-2:clamp(16px,1.8vw,20px);
+      --space-3:clamp(24px,2.5vw,32px);
+      --space-4:clamp(36px,4vw,56px);
+      --max:1200px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#FFFFFF; --fg:#0B0D10; --muted:#5B6470; --line:rgba(0,0,0,.08); --acc:#2B82F6; --acc-soft:#2B82F6; --deep:#E8F5F0; --deep-strong:#145A46; }
+    }
+
+    /* ===== Base ===== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;}
+    a{color:var(--acc); text-decoration:none}
+    a:hover{ text-decoration:underline }
+    img{max-width:100%; height:auto}
+    .container{max-width:var(--max); margin:0 auto; padding:0 var(--space-3)}
+    header, section, footer{padding:var(--space-4) 0}
+    hr{border:0; height:1px; background:var(--line); margin:var(--space-3) 0}
+
+    /* ===== Accessible skip link ===== */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:var(--space-3);top:var(--space-3);width:auto;height:auto;background:var(--acc);color:white;padding:.5rem .75rem;border-radius:var(--radius);z-index:999}
+
+    /* ===== Hero ===== */
+    .hero{display:grid; gap:var(--space-3); align-items:center}
+    .hero-badge{display:inline-flex; gap:.5rem; align-items:center; padding:.4rem .8rem; border:1px solid var(--line); border-radius:var(--r-btn); background:linear-gradient(180deg, rgba(255,255,255,.03), transparent); font:12px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--muted)}
+    .logo{display:inline-flex; align-items:center; gap:.6rem}
+    .logo-mark{display:inline-grid; place-items:center; width:40px; height:40px; border-radius:8px; background:var(--deep); box-shadow:inset 0 0 0 1px var(--line)}
+    .logo-mark span{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#EAF0F7}
+    h1{font-size:clamp(28px,5.5vw,48px); line-height:1.15; margin:0}
+    .lead{font-size:clamp(16px,2.2vw,20px); color:var(--muted); margin:0}
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:var(--space-3)}
+    .btn{display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.2rem; border-radius:var(--r-btn); background:var(--acc); color:#051122; font-weight:700; border:0; box-shadow:0 6px 22px rgba(43,130,246,.25)}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(43,130,246,.35)}
+    .btn.secondary{background:transparent; color:var(--fg); border:1px solid var(--line)}
+    .motto{font-style:italic; color:var(--muted)}
+
+    /* ===== Grids ===== */
+    .grid{display:grid; gap:var(--space-3)}
+    @media (min-width:768px){ .two{grid-template-columns:1fr 1fr} .three{grid-template-columns:repeat(3,1fr)} }
+
+    /* ===== Cards ===== */
+    .card{border:1px solid var(--line); border-radius:var(--radius); padding:var(--space-3); background:linear-gradient(180deg, rgba(255,255,255,.02), transparent); box-shadow:var(--shadow)}
+    .card h3{margin-top:0}
+    .card:hover{transform:scale(1.02)}
+    .muted{color:var(--muted)}
+
+    /* ===== Sections ===== */
+    .section-title{font-size:clamp(22px,3.8vw,32px); margin:0 0 var(--space-2)}
+    .chips{display:flex; gap:.5rem; flex-wrap:wrap}
+    .chip{padding:.35rem .7rem; border-radius:var(--r-btn); border:1px solid var(--line); color:var(--muted); font-size:.9rem}
+
+    /* ===== Testimonials ===== */
+    .quote{font-style:italic}
+    .who{margin-top:.6rem; color:var(--muted); font-size:.95rem}
+
+    /* ===== Contact ===== */
+    .contact-list{list-style:none; padding:0; margin:0}
+    .contact-list li+li{margin-top:.6rem}
+    .contact .btn{margin-top:var(--space-2)}
+
+    /* ===== Footer ===== */
+    footer small{color:var(--muted)}
+
+    /* ===== Animations ===== */
+    @media (prefers-reduced-motion: no-preference){
+      .reveal{opacity:0; transform:translateY(10px); transition:opacity .28s ease-out, transform .28s ease-out}
+      .reveal.in{opacity:1; transform:none}
+      .glow:hover{box-shadow:0 0 0 3px rgba(124,207,253,.15), 0 0 30px rgba(124,207,253,.2)}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Пропустить к содержанию</a>
+
+  <header class="container hero reveal" role="banner" aria-label="Вступление">
+    <div class="logo">
+      <div class="logo-mark" aria-hidden="true"><span>&lt;/&gt;</span></div>
+      <span><strong>WebMogilevtsev</strong></span>
+    </div>
+    <div>
+      <div class="hero-badge" aria-label="Имя и роль">Дмитрий «WebMogilevtsev» · разработка & консультирование</div>
+      <h1>Разработка без бюрократии — честно и по делу</h1>
+      <p class="lead">Создаю веб‑сервисы и программы, провожу консультации и ревью. Понятная подача, надёжный результат.</p>
+      <p class="motto">«Не откладывай на завтра, то что можешь сделать сегодня»</p>
+      <div class="cta-row">
+        <a class="btn glow" href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener" aria-label="Написать в Telegram">Написать в Telegram</a>
+        <a class="btn secondary" href="#contact">Контакты</a>
+        <button class="btn secondary" id="langToggle" aria-label="Переключить язык">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- About -->
+    <section class="container reveal" id="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title" data-i18n="about_title">Обо мне</h2>
+      <div class="grid two">
+        <div class="card">
+          <p data-i18n="about_p1">Я Дима. Креативный бэкендер с тёплой подачей и прямым разговором.</p>
+          <p data-i18n="about_p2">Ценности: честность, открытость, вежливость, прямолинейность. Со мной легко общаться; объясняю просто и понятно. И да — выгляжу брутально и делаю работу.</p>
+          <div class="chips" aria-label="Ключевые качества">
+            <span class="chip" data-i18n="chip_honest">честный</span>
+            <span class="chip" data-i18n="chip_smart">умный</span>
+            <span class="chip" data-i18n="chip_brutal">брутальный</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3 data-i18n="help_title">Чем помогу</h3>
+          <ul>
+            <li data-i18n="help_1">Разработка программ и веб‑сервисов (чистая архитектура, микросервисы).</li>
+            <li data-i18n="help_2">Консультации: архитектура, карьера, код‑ревью.</li>
+            <li data-i18n="help_3">Ревью проектов перед релизом.</li>
+            <li data-i18n="help_4">Платный Telegram‑канал, видео‑курсы и продукты.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="container reveal" id="services" aria-labelledby="services-title">
+      <h2 class="section-title" id="services-title" data-i18n="services_title">Услуги</h2>
+      <div class="grid three">
+        <article class="card">
+          <h3 data-i18n="srv_dev">Разработка</h3>
+          <p class="muted" data-i18n="srv_dev_d">Бэкенд‑ядро, веб‑сервисы, интеграции. Фокус на надёжность и масштабируемость.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="srv_consult">Консультации</h3>
+          <p class="muted" data-i18n="srv_consult_d">1:1 созвоны — от выбора архитектуры до карьерной стратегии.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="srv_review">Ревью</h3>
+          <p class="muted" data-i18n="srv_review_d">Технический аудит и код‑ревью перед релизом. Без лишней бюрократии.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Cases -->
+    <section class="container reveal" id="cases" aria-labelledby="cases-title">
+      <h2 class="section-title" id="cases-title" data-i18n="cases_title">Кейсы и результаты</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3 data-i18n="case1_t">Карьерный буст</h3>
+          <p data-i18n="case1_d">Провёл интервью с новичком, помог поверить в себя — оффер на <strong>200 000 ₽</strong> без коммерческого опыта.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="case2_t">Курс по NestJS</h3>
+          <p data-i18n="case2_d">Сделал 10 ранних продаж, затем выложил курс бесплатно — поддерживаю комьюнити.</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="case3_t">Микросервисы</h3>
+          <p data-i18n="case3_d">Разработал приложение для компании; сервис вышел в плюс и приносит прибыль.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products / Subscription -->
+    <section class="container reveal" id="products" aria-labelledby="products-title">
+      <h2 class="section-title" id="products-title" data-i18n="products_title">Подписка и продукты</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3 data-i18n="prod_channel">Закрытый Telegram‑канал</h3>
+          <p class="muted" data-i18n="prod_channel_d">Практика, архитектура, ответы на вопросы. Подписка для своих.</p>
+          <a class="btn glow" href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener" data-i18n="cta_subscribe">Подписаться</a>
+        </div>
+        <div class="card">
+          <h3 data-i18n="prod_consult">Консультации 1:1</h3>
+          <p class="muted" data-i18n="prod_consult_d">Разбор задач и стратегии. Бережно к времени, прицельно к цели.</p>
+          <a class="btn secondary" href="#contact" data-i18n="cta_book">Записаться</a>
+        </div>
+        <div class="card">
+          <h3 data-i18n="prod_courses">Курсы и гайды</h3>
+          <p class="muted" data-i18n="prod_courses_d">Коротко и по делу: NestJS и архитектурные подходы.</p>
+          <a class="btn secondary" href="#contact" data-i18n="cta_get">Получить</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="container reveal" id="testimonials" aria-labelledby="testimonials-title">
+      <h2 class="section-title" id="testimonials-title" data-i18n="testimonials_title">Отзывы</h2>
+      <div class="grid three">
+        <div class="card">
+          <p class="quote" data-i18n="t1_q">«Чётко разложил архитектуру и помог запустить фичу без техдолга.»</p>
+          <p class="who" data-i18n="t1_w">Анна, тимлид</p>
+        </div>
+        <div class="card">
+          <p class="quote" data-i18n="t2_q">«После консультации понял, куда расти. Прошёл собес и апнул оффер.»</p>
+          <p class="who" data-i18n="t2_w">Сергей, разработчик</p>
+        </div>
+        <div class="card">
+          <p class="quote" data-i18n="t3_q">«Ревью от Димы сэкономило нам релизный цикл.»</p>
+          <p class="who" data-i18n="t3_w">Игорь, проджект</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="container reveal contact" id="contact" aria-labelledby="contact-title">
+      <h2 class="section-title" id="contact-title" data-i18n="contact_title">Контакты</h2>
+      <div class="grid two">
+        <div class="card">
+          <ul class="contact-list">
+            <li><strong data-i18n="c_phone">Телефон:</strong> <a href="tel:+79088696282">8 908 869‑62‑82</a></li>
+            <li><strong>Telegram:</strong> <a href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener">@mogilevtsevdmitry</a></li>
+            <li><strong>E‑mail:</strong> <a href="mailto:webmogilevtsev@ya.ru">webmogilevtsev@ya.ru</a></li>
+            <li><strong data-i18n="c_hours">Время работы:</strong> 10:00–18:00 (UTC+5)</li>
+          </ul>
+          <a class="btn glow" href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener" data-i18n="cta_telegram">Написать в Telegram</a>
+        </div>
+        <div class="card">
+          <h3 data-i18n="mail_title">Быстрый e‑mail</h3>
+          <form action="mailto:webmogilevtsev@ya.ru" method="post" enctype="text/plain">
+            <label for="fname" data-i18n="f_name">Имя</label>
+            <input id="fname" name="name" type="text" required style="width:100%;padding:.7rem;margin:.4rem 0;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--fg)" />
+            <label for="fmsg" data-i18n="f_msg">Сообщение</label>
+            <textarea id="fmsg" name="message" rows="4" required style="width:100%;padding:.7rem;margin:.4rem 0;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--fg)"></textarea>
+            <button class="btn glow" type="submit" data-i18n="f_send">Отправить</button>
+          </form>
+          <p class="muted" data-i18n="privacy_hint">Отправляя сообщение, вы соглашаетесь с политикой конфиденциальности.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container reveal" role="contentinfo">
+    <hr />
+    <small>© <span id="year"></span> Дмитрий Могилевцев · WebMogilevtsev · <a href="#privacy" aria-controls="privacy" aria-expanded="false" id="privacyLink">Политика конфиденциальности</a></small>
+  </footer>
+
+  <!-- Privacy Modal -->
+  <dialog id="privacy" aria-labelledby="privacy-title">
+    <article style="max-width:700px">
+      <h3 id="privacy-title">Политика конфиденциальности</h3>
+      <p>Я собираю только данные, которые вы отправляете через форму или по почте. Данные используются для ответа на запрос и не передаются третьим лицам, кроме сервисов обработки почты/заявок. По запросу данные будут удалены.</p>
+      <form method="dialog">
+        <button class="btn secondary">Закрыть</button>
+      </form>
+    </article>
+  </dialog>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Intersection reveal
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+    }
+
+    // Privacy dialog
+    const privacy = document.getElementById('privacy');
+    const plink = document.getElementById('privacyLink');
+    if (privacy && plink){
+      plink.addEventListener('click', (e)=>{ e.preventDefault(); privacy.showModal(); });
+    }
+
+    // Simple i18n: RU default, toggle to EN
+    const dict = {
+      en: {
+        about_title:"About me",
+        about_p1:"I’m Dima — a creative backend engineer with a warm, straightforward communication style.",
+        about_p2:"Values: honesty, openness, politeness, straightforwardness. Easy to talk to; I explain clearly. Yes — I look brutal and I get things done.",
+        chip_honest:"honest", chip_smart:"smart", chip_brutal:"bold",
+        help_title:"How I help",
+        help_1:"Software & web services (clean architecture, microservices).",
+        help_2:"Consulting: architecture, career, code reviews.",
+        help_3:"Pre‑release technical review.",
+        help_4:"Paid Telegram channel, video courses, products.",
+        services_title:"Services",
+        srv_dev:"Development", srv_dev_d:"Backend core, web services, integrations. Focused on reliability and scale.",
+        srv_consult:"Consulting", srv_consult_d:"1:1 calls — from architecture choices to career strategy.",
+        srv_review:"Review", srv_review_d:"Technical audit & code review before release.",
+        cases_title:"Cases & results",
+        case1_t:"Career boost", case1_d:"Coached a junior — landed a <strong>200k ₽</strong> offer without commercial experience.",
+        case2_t:"NestJS course", case2_d:"10 early sales, then published for free to support the community.",
+        case3_t:"Microservices", case3_d:"Built a system that turned profitable for the company.",
+        products_title:"Subscription & products",
+        prod_channel:"Private Telegram channel", prod_channel_d:"Practice, architecture notes, Q&A. For insiders.",
+        prod_consult:"1:1 consultations", prod_consult_d:"From strategy to code. Respecting your time.",
+        prod_courses:"Courses & guides", prod_courses_d:"Short and practical — NestJS and architecture.",
+        c_phone:"Phone:", c_hours:"Hours:",
+        contact_title:"Contacts",
+        mail_title:"Quick e‑mail",
+        f_name:"Name", f_msg:"Message", f_send:"Send",
+        privacy_hint:"By sending a message you agree to the privacy policy.",
+        testimonials_title:"Testimonials",
+        t1_q:"“Mapped the architecture clearly and helped us ship without tech debt.”", t1_w:"Anna, team lead",
+        t2_q:"“After the session I knew my path. Passed the interview and raised my offer.”", t2_w:"Sergey, developer",
+        t3_q:"“His review saved us a release cycle.”", t3_w:"Igor, PM",
+        cta_subscribe:"Subscribe", cta_book:"Book", cta_get:"Get", cta_telegram:"Message on Telegram"
+      }
+    };
+    const toTranslate = document.querySelectorAll('[data-i18n]');
+    const langBtn = document.getElementById('langToggle');
+    let current='ru';
+    langBtn?.addEventListener('click', ()=>{
+      current = current==='ru' ? 'en' : 'ru';
+      if(current==='en'){
+        document.documentElement.lang='en';
+        langBtn.textContent='RU';
+        toTranslate.forEach(el=>{
+          const key=el.getAttribute('data-i18n');
+          if(dict.en[key]) el.innerHTML = dict.en[key];
+        });
+      } else {
+        document.documentElement.lang='ru';
+        langBtn.textContent='EN';
+        // naive revert: reload to original RU content to keep copy fresh
+        location.reload();
+      }
+    });
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Дмитрий Могилевцев",
+    "alternateName":"WebMogilevtsev",
+    "jobTitle":"Software Engineer / Consultant",
+    "url":"", 
+    "email":"mailto:webmogilevtsev@ya.ru",
+    "telephone":"+7-908-869-62-82",
+    "sameAs":["https://t.me/mogilevtsevdmitry"],
+    "knowsAbout":["Backend","NestJS","Microservices","Architecture","Code Review","Consulting"],
+    "workHours":"Mo-Fr 10:00-18:00",
+    "areaServed":"RU"
+  }
+  </script>
+</body>
+</html>
