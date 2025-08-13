@@ -95,6 +95,7 @@
     .btn--ghost:hover{ filter:brightness(1.1) }
     .btn--icon{padding:.65rem; line-height:0}
     .btn--icon svg{width:20px; height:20px}
+    .btn--telegram svg{width:20px; height:20px}
 
     @media (max-width:480px){
       .brand{gap:6px}
@@ -102,6 +103,8 @@
       .brand-name{font-size:14px; line-height:1.1}
       .nav{padding:8px 0}
       .nav-cta{gap:6px}
+      .btn--telegram{padding:.65rem; line-height:0}
+      .btn--telegram span{display:none}
     }
 
     /* ===== Headings: bright & modern ===== */
@@ -172,8 +175,9 @@
           <button id="ruBtn" class="active" aria-pressed="true">RU</button>
           <button id="enBtn" aria-pressed="false">EN</button>
         </div>
-        <a class="btn btn--icon" href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener" aria-label="Telegram">
+        <a class="btn btn--telegram" href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener" aria-label="Telegram">
           <svg viewBox="0 0 448 512" aria-hidden="true"><path fill="currentColor" d="M446.7 65.4L382.2 461.3c-7.1 40.5-31.8 50.7-64.2 32L199.6 370.8l-53.6 51.6c-6 5.8-10.9 10.7-22.4 10.7l8-114.4 207.6-187.5c9-7.9-2-12.3-14-4.3L96.6 300.7 16.2 275.5c-22.9-7.1-22.7-23.9 5.2-33.8L421.6 69c28.5-10.6 44 6.9 25.1 32z"/></svg>
+          <span data-i18n="cta_telegram">Написать в Telegram</span>
         </a>
       </div>
     </div>
