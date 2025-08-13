@@ -58,8 +58,10 @@
     }
     .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0}
     .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
+    .brand-tagline{font-size:14px; color:var(--muted); line-height:1}
+    .brand-name{font-size:16px; font-weight:900; line-height:1.2}
     .logo{
-      width:40px; height:40px; border-radius:10px; display:grid; place-items:center;
+      width:40px; height:40px; border-radius:10px; display:grid; place-items:center; flex-shrink:0;
       background:
         radial-gradient(60% 60% at 30% 30%, rgba(100,181,255,.25), transparent),
         radial-gradient(60% 60% at 70% 70%, rgba(21,194,141,.25), transparent),
@@ -70,7 +72,7 @@
     }
     .nav-cta{display:flex; align-items:center; gap:10px}
     .lang{
-      display:inline-flex; border:1px solid var(--line); border-radius:var(--r-btn); overflow:hidden;
+      display:inline-flex; border:1px solid var(--line); border-radius:var(--r-btn); overflow:hidden; flex-shrink:0;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
     }
     .lang button{
@@ -91,6 +93,16 @@
       box-shadow:none;
     }
     .btn--ghost:hover{ filter:brightness(1.1) }
+    .btn--icon{padding:.65rem; line-height:0}
+    .btn--icon svg{width:20px; height:20px}
+
+    @media (max-width:480px){
+      .brand{gap:6px}
+      .brand-tagline{font-size:12px}
+      .brand-name{font-size:14px; line-height:1.1}
+      .nav{padding:8px 0}
+      .nav-cta{gap:6px}
+    }
 
     /* ===== Headings: bright & modern ===== */
     h1,h2,h3{
@@ -151,8 +163,8 @@
       <div class="brand">
         <div class="logo" aria-hidden="true">&lt;/&gt;</div>
         <div>
-          <div style="font-size:14px; color:var(--muted); line-height:1;">WebMogilevtsev</div>
-          <div style="font-size:16px; font-weight:900;">Дмитрий Могилевцев</div>
+          <div class="brand-tagline">WebMogilevtsev</div>
+          <div class="brand-name">Дмитрий Могилевцев</div>
         </div>
       </div>
       <div class="nav-cta">
@@ -160,7 +172,9 @@
           <button id="ruBtn" class="active" aria-pressed="true">RU</button>
           <button id="enBtn" aria-pressed="false">EN</button>
         </div>
-        <a class="btn" href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn btn--icon" href="https://t.me/mogilevtsevdmitry" target="_blank" rel="noopener" aria-label="Telegram">
+          <svg viewBox="0 0 448 512" aria-hidden="true"><path fill="currentColor" d="M446.7 65.4L382.2 461.3c-7.1 40.5-31.8 50.7-64.2 32L199.6 370.8l-53.6 51.6c-6 5.8-10.9 10.7-22.4 10.7l8-114.4 207.6-187.5c9-7.9-2-12.3-14-4.3L96.6 300.7 16.2 275.5c-22.9-7.1-22.7-23.9 5.2-33.8L421.6 69c28.5-10.6 44 6.9 25.1 32z"/></svg>
+        </a>
       </div>
     </div>
   </header>
