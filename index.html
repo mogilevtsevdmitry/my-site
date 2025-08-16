@@ -319,9 +319,11 @@
         </div>
         <div class="card">
           <h3 data-i18n="mail_title">Быстрый e‑mail</h3>
-          <form action="mailto:webmogilevtsev@ya.ru" method="post" enctype="text/plain">
+          <form action="https://formsubmit.co/webmogilevtsev@ya.ru" method="POST">
             <label for="fname" data-i18n="f_name">Имя</label>
             <input id="fname" name="name" type="text" required style="width:100%;padding:.8rem;margin:.4rem 0;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--fg)" />
+            <label for="femail" data-i18n="f_email">E‑mail</label>
+            <input id="femail" name="email" type="email" required style="width:100%;padding:.8rem;margin:.4rem 0;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--fg)" />
             <label for="fmsg" data-i18n="f_msg">Сообщение</label>
             <textarea id="fmsg" name="message" rows="4" required style="width:100%;padding:.8rem;margin:.4rem 0;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--fg)"></textarea>
             <button class="btn" type="submit" data-i18n="f_send">Отправить</button>
@@ -411,7 +413,7 @@
         contact_title:"Contacts",
         c_phone:"Phone:", c_hours:"Hours:",
         mail_title:"Quick e‑mail",
-        f_name:"Name", f_msg:"Message", f_send:"Send",
+        f_name:"Name", f_email:"Email", f_msg:"Message", f_send:"Send",
         privacy_hint:"By sending a message you agree to the privacy policy.",
         cta_email:"Email me"
       }
