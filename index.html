@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="ru" class="theme-dark">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WebMogilevtsev — Разработка, консультации, ревью</title>
   <meta name="description" content="Дмитрий «WebMogilevtsev»: создание веб‑сервисов, консультации и ревью. Честно, быстро, по делу." />
-  <meta name="theme-color" content="#070A0A" />
+  <meta name="theme-color" content="#E6F7FF" />
   <style>
-    /* ===== Design tokens (dark-first) ===== */
+    /* ===== Design tokens (light-first) ===== */
     :root{
-      --bg:#070A0A;           /* глубоко-тёмный */
-      --panel:#0C1110;        /* панель/карточки */
-      --fg:#E8EEF5;           /* основной текст */
-      --muted:#98A6B3;        /* вторичный текст */
-      --acc:#64B5FF;          /* неоново-голубой акцент (мягкий) */
-      --acc-2:#15C28D;        /* дорогой тёмный зелёный (эмеральд) */
-      --line:rgba(255,255,255,.08);
+      --bg:#E6F7FF;           /* светлый фон */
+      --panel:#F7F9FB;        /* панель/карточки */
+      --fg:#0A0D10;           /* основной текст */
+      --muted:#5C6672;        /* вторичный текст */
+      --acc:#2B82F6;          /* голубой акцент */
+      --acc-2:#157F63;        /* тёмно-зелёный акцент */
+      --line:rgba(0,0,0,.08);
       --radius:14px; --r-btn:999px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --shadow:0 10px 30px rgba(0,0,0,.15);
       --container:1200px;
       --space-1:clamp(8px,1vw,12px);
       --space-2:clamp(14px,1.6vw,18px);
@@ -25,37 +25,29 @@
       --space-4:clamp(34px,4vw,56px);
       --space-5:clamp(44px,6vw,84px);
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#FFFFFF; --panel:#F7F9FB; --fg:#0A0D10; --muted:#5C6672; --line:rgba(0,0,0,.08);
-        --acc:#2B82F6; --acc-2:#157F63;
-      }
-      html.theme-dark :root{} /* принудительно тёмная тема по запросу */
-    }
 
     /* ===== Base ===== */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background:radial-gradient(1200px 600px at 20% -10%, rgba(21,194,141,.08), transparent),
-                       radial-gradient(1000px 500px at 120% 10%, rgba(100,181,255,.07), transparent),
-                       var(--bg);
-      color:var(--fg);
-      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      letter-spacing:.2px;
-    }
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0;
+        background:linear-gradient(135deg, #E6F7FF 0%, #E9FFF7 100%);
+        color:var(--fg);
+        font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+        letter-spacing:.2px;
+      }
     a{color:var(--acc); text-decoration:none}
     img{max-width:100%; height:auto}
     .container{max-width:var(--container); margin:0 auto; padding:0 var(--space-3)}
     section{padding:var(--space-5) 0}
 
     /* ===== Header / Nav ===== */
-    .header{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:linear-gradient(to bottom, rgba(7,10,10,.9), rgba(7,10,10,.65));
-      border-bottom:1px solid var(--line);
-    }
+      .header{
+        position:sticky; top:0; z-index:20;
+        backdrop-filter:saturate(140%) blur(10px);
+        background:linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,.65));
+        border-bottom:1px solid var(--line);
+      }
     .nav{display:flex; align-items:center; gap:16px; padding:12px 0}
     .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px; flex:1}
     .brand-tagline{font-size:14px; color:var(--muted); line-height:1}
