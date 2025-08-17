@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WebMogilevtsev — Разработка, консультации, ревью</title>
   <meta name="description" content="Дмитрий «WebMogilevtsev»: создание веб‑сервисов, консультации и ревью. Честно, быстро, по делу." />
-  <meta name="theme-color" content="#E6F7FF" />
+  <meta name="theme-color" content="#FFFFFF" />
   <style>
     /* ===== Design tokens (light-first) ===== */
     :root{
-      --bg:#E6F7FF;           /* светлый фон */
-      --panel:#F7F9FB;        /* панель/карточки */
+      --bg:#FFFFFF;           /* светлый фон */
+      --panel:#FFFFFF;        /* панель/карточки */
       --fg:#0A0D10;           /* основной текст */
       --muted:#5C6672;        /* вторичный текст */
       --acc:#2B82F6;          /* голубой акцент */
@@ -31,7 +31,7 @@
       html,body{height:100%}
       body{
         margin:0;
-        background:linear-gradient(135deg, #E6F7FF 0%, #E9FFF7 100%);
+        background:var(--bg);
         color:var(--fg);
         font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
         letter-spacing:.2px;
@@ -118,11 +118,7 @@
     .hero{display:grid; gap:var(--space-3); padding:var(--space-5) 0 var(--space-4)}
     .hero-card{
       border:1px solid var(--line); border-radius:22px; padding:var(--space-4);
-      background:
-        radial-gradient(100% 100% at 0% 0%, rgba(100,181,255,.08), transparent 60%),
-        radial-gradient(100% 100% at 100% 0%, rgba(21,194,141,.08), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
-        var(--panel);
+      background:var(--panel);
       box-shadow:var(--shadow);
     }
     .grid{display:grid; gap:var(--space-3)}
@@ -130,7 +126,7 @@
 
     .card{
       border:1px solid var(--line); border-radius:16px; padding:var(--space-3);
-      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01));
+      background:var(--panel);
       box-shadow:var(--shadow);
     }
     .muted{color:var(--muted)}
