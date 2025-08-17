@@ -54,13 +54,10 @@
     .brand-name{font-size:16px; font-weight:900; line-height:1.2}
     .logo{
       width:40px; height:40px; border-radius:10px; display:grid; place-items:center; flex-shrink:0;
-      background:
-        radial-gradient(60% 60% at 30% 30%, rgba(100,181,255,.25), transparent),
-        radial-gradient(60% 60% at 70% 70%, rgba(21,194,141,.25), transparent),
-        var(--panel);
+      background:var(--acc);
       box-shadow:inset 0 0 0 1px var(--line), 0 4px 18px rgba(0,0,0,.35);
       font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      color:#EAF6FF;
+      color:#fff;
     }
     .nav-cta{display:flex; align-items:center; gap:10px}
     .lang{
@@ -99,12 +96,11 @@
       .btn--telegram span{display:none}
     }
 
-    /* ===== Headings: bright & modern ===== */
+    /* ===== Headings ===== */
     h1,h2,h3{
       margin:0 0 var(--space-2);
       line-height:1.1; font-weight:900; letter-spacing:.2px;
-      background:linear-gradient(90deg, #BEE4FF 0%, #64B5FF 35%, #65F2C0 70%, #B0FFE2 100%);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+      color:var(--acc);
     }
     .overline{
       font:12px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -114,7 +110,7 @@
 
     /* ===== Sections ===== */
     .intro{padding:var(--space-4) 0; text-align:center}
-    .intro-photo{width:150px; height:150px; border-radius:50%; object-fit:cover}
+    .intro-photo{width:150px; height:200px; border-radius:12px; object-fit:cover; box-shadow:var(--shadow)}
     .hero{display:grid; gap:var(--space-3); padding:var(--space-5) 0 var(--space-4)}
     .hero-card{
       border:1px solid var(--line); border-radius:22px; padding:var(--space-4);
@@ -420,6 +416,11 @@
     const ruBtn = document.getElementById('ruBtn');
     const enBtn = document.getElementById('enBtn');
     const i18nEls = document.querySelectorAll('[data-i18n]');
+    const ruTexts = {};
+    i18nEls.forEach(el=>{
+      const k = el.getAttribute('data-i18n');
+      ruTexts[k] = el.innerHTML;
+    });
 
     function setLang(lang){
       const isEN = lang === 'en';
@@ -428,15 +429,15 @@
       ruBtn.classList.toggle('active', !isEN);
       enBtn.setAttribute('aria-pressed', isEN);
       ruBtn.setAttribute('aria-pressed', !isEN);
-      if(isEN){
-        i18nEls.forEach(el=>{
-          const k = el.getAttribute('data-i18n');
+      i18nEls.forEach(el=>{
+        const k = el.getAttribute('data-i18n');
+        if(isEN){
           if(dict.en[k]) el.innerHTML = dict.en[k];
-        });
-      } else {
-        // Переключаемся на RU (оригинальная разметка) — перезагрузим для чистоты
-        location.reload();
-      }
+        } else {
+          el.innerHTML = ruTexts[k];
+        }
+      });
+      window.scrollTo({top:0, behavior:'auto'});
     }
     enBtn.addEventListener('click', ()=>setLang('en'));
     ruBtn.addEventListener('click', ()=>setLang('ru'));
