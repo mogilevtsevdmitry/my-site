@@ -11,10 +11,10 @@
     :root{
       --bg:#FFFFFF;           /* светлый фон */
       --panel:#FFFFFF;        /* панель/карточки */
-      --fg:#0A0D10;           /* основной текст */
+      --fg:#333333;           /* основной текст */
       --muted:#5C6672;        /* вторичный текст */
-      --acc:#2B82F6;          /* голубой акцент */
-      --acc-2:#157F63;        /* тёмно-зелёный акцент */
+      --acc:#FF8A00;          /* оранжевый акцент */
+      --acc-2:#FF6A00;        /* тёмно-оранжевый акцент */
       --line:rgba(0,0,0,.08);
       --radius:14px; --r-btn:999px;
       --shadow:0 10px 30px rgba(0,0,0,.15);
@@ -61,10 +61,8 @@
       box-shadow:inset 0 0 0 1px var(--line), 0 4px 18px rgba(0,0,0,.35);
       font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       color:#EAF6FF;
-      display: none;
     }
     .nav-cta{display:flex; align-items:center; gap:10px}
-    .nav-profile{width:40px; height:40px; border-radius:50%; object-fit:cover}
     .lang{
       display:inline-flex; border:1px solid var(--line); border-radius:var(--r-btn); overflow:hidden; flex-shrink:0;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
@@ -72,18 +70,18 @@
     .lang button{
       padding:.45rem .8rem; background:transparent; color:var(--muted); border:0; font-weight:700; cursor:pointer
     }
-    .lang button.active{ color:#061018; background:linear-gradient(90deg, var(--acc), var(--acc-2)) }
+    .lang button.active{ color:var(--fg); background:linear-gradient(90deg, var(--acc), var(--acc-2)) }
     .btn{
       --bg-btn: linear-gradient(90deg, var(--acc), var(--acc-2));
       display:inline-flex; align-items:center; gap:.6rem; padding:.85rem 1.15rem;
       border-radius:var(--r-btn); border:1px solid transparent; font-weight:800; letter-spacing:.2px;
-      background:var(--bg-btn); color:#061018; box-shadow:0 10px 24px rgba(100,181,255,.25);
+      background:var(--bg-btn); color:var(--fg); box-shadow:0 10px 24px rgba(255,138,0,.25);
       transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
     }
-    .btn:hover{ transform:translateY(-1px); box-shadow:0 14px 30px rgba(100,181,255,.32) }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 14px 30px rgba(255,138,0,.32) }
     .btn:active{ transform:translateY(0) scale(.99) }
     .btn--ghost{
-      background:transparent; color:var(--fg); border:1px solid var(--line);
+      background:#FFFFFF; color:var(--fg); border:1px solid var(--line);
       box-shadow:none;
     }
     .btn--ghost:hover{ filter:brightness(1.1) }
@@ -97,7 +95,6 @@
       .brand-name{font-size:14px; line-height:1.1}
       .nav{padding:8px 0}
       .nav-cta{gap:6px}
-      .nav-profile{order:-1}
       .btn--telegram{padding:.65rem; line-height:0}
       .btn--telegram span{display:none}
     }
@@ -116,6 +113,8 @@
     .lead{color:var(--muted); font-size:clamp(16px,2.2vw,20px)}
 
     /* ===== Sections ===== */
+    .intro{padding:var(--space-4) 0; text-align:center}
+    .intro-photo{width:150px; height:150px; border-radius:50%; object-fit:cover}
     .hero{display:grid; gap:var(--space-3); padding:var(--space-5) 0 var(--space-4)}
     .hero-card{
       border:1px solid var(--line); border-radius:22px; padding:var(--space-4);
@@ -171,11 +170,17 @@
           <span data-i18n="cta_telegram">Написать в Telegram</span>
         </a>
       </div>
-      <img class="nav-profile" src="https://sun9-46.userapi.com/s/v1/ig2/HUjdrdtdBUIUicfqR-uDh5TbfCmg75IOVvj0XVQofJExKAAUiWGt914Dyx3qGbZMCdHCNgHhkCjx2vuUbKH0iX3Q.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,1024x1536&from=bu&u=oef-OwTyze-nqSntkgsY0qAKD4k7SG_MYiXUr__5oTQ" alt="Фото профиля" />
     </div>
   </header>
 
   <main id="main">
+    <!-- Intro photo -->
+    <section class="intro">
+      <div class="container">
+        <img class="intro-photo" src="https://sun9-46.userapi.com/s/v1/ig2/HUjdrdtdBUIUicfqR-uDh5TbfCmg75IOVvj0XVQofJExKAAUiWGt914Dyx3qGbZMCdHCNgHhkCjx2vuUbKH0iX3Q.jpg?quality=95&as=32x48,48x72,72x108,108x162,160x240,240x360,360x540,480x720,540x810,640x960,720x1080,1024x1536&from=bu&u=oef-OwTyze-nqSntkgsY0qAKD4k7SG_MYiXUr__5oTQ" alt="Моё фото" />
+      </div>
+    </section>
+
     <!-- Hero -->
     <section class="container hero reveal">
       <div class="hero-card">
