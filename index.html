@@ -73,6 +73,16 @@
     .contacts-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
     .contact-item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,var(--panel),var(--panel-2))}
 
+    /* Modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(3,6,10,.7);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.2s ease;z-index:100}
+    .modal.is-visible{opacity:1;pointer-events:auto}
+    .modal-card{width:min(520px,92%);background:linear-gradient(180deg,#12161b,#0f1318);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative}
+    .modal-card h3{margin:0 0 8px;font-size:22px}
+    .modal-card p{margin:0;color:var(--muted)}
+    .modal-actions{margin-top:18px;display:flex;justify-content:flex-end}
+    .modal-close{position:absolute;top:12px;right:12px;border:none;background:rgba(255,255,255,.06);color:var(--text);width:32px;height:32px;border-radius:10px;cursor:pointer}
+    .modal-close:hover{background:rgba(255,255,255,.12)}
+
     footer{padding:28px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);margin-top:24px}
 
     /* Responsive */
@@ -164,6 +174,8 @@
       <h2 class="section-title">Связаться со мной</h2>
       <div class="card" style="margin-bottom:12px">
         <form id="contactForm" action="https://formsubmit.co/webmogilevtsev@ya.ru" method="POST">
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
           <div class="field">
             <label for="name">Ваше имя</label>
             <input id="name" name="name" type="text" placeholder="Иван" required />
@@ -195,18 +207,90 @@
     <div class="container">© <span id="year"></span> Дмитрий Могилевцев · Node.js · Сделано с любовью и парой асинхронных await’ов.</div>
   </footer>
 
+  <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Закрыть">✕</button>
+      <h3 id="modalTitle">Сообщение отправлено</h3>
+      <p id="modalMessage">Спасибо! Я получил вашу заявку и скоро свяжусь с вами.</p>
+      <div class="modal-actions">
+        <button class="btn primary" type="button">Отлично</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const form = document.getElementById('contactForm');
+    const modal = document.getElementById('successModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    const closeModal = () => {
+      modal.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    };
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    modal.querySelectorAll('button').forEach((button) => {
+      button.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('is-visible')) {
+        closeModal();
+      }
+    });
+
     form.addEventListener('submit', (e)=>{
       e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
-      const subject = encodeURIComponent('Заявка с лендинга: ' + name);
-      const body = encodeURIComponent(`Имя: ${name}\nEmail: ${email}\n\nСообщение:\n${message}`);
-      window.location.href = `mailto:webmogilevtsev@ya.ru?subject=${subject}&body=${body}`;
+      const formData = new FormData(form);
+      formData.set('_subject', `Заявка с лендинга: ${name}`);
+      formData.set('_replyto', email);
+      formData.set('message', message);
+
+      submitButton.disabled = true;
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Отправляем...';
+
+      fetch('https://formsubmit.co/ajax/webmogilevtsev@ya.ru', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Ошибка отправки');
+          }
+          return response.json();
+        })
+        .then(() => {
+          form.reset();
+          modalMessage.textContent = 'Спасибо! Я получил вашу заявку и скоро свяжусь с вами.';
+          modal.classList.add('is-visible');
+          document.body.style.overflow = 'hidden';
+        })
+        .catch(() => {
+          modalMessage.textContent = 'Упс! Не удалось отправить сообщение. Попробуйте ещё раз или напишите в Telegram.';
+          modal.classList.add('is-visible');
+          document.body.style.overflow = 'hidden';
+        })
+        .finally(() => {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        });
     });
   </script>
 
